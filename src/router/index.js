@@ -1,0 +1,24 @@
+import { createRouter, createWebHistory } from 'vue-router'
+
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    linkActiveClass: "nav-link-active",
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: () => import(/* webpackChunkName: "home" */ '../views/Index.vue'),
+            meta:{
+            title: "Home"
+            }
+        },
+    ]
+})
+
+router.beforeEach((to, from, next) => {
+    document.title = `${to.meta.title}`;
+    next()
+})
+
+
+export default router
