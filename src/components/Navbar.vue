@@ -1,10 +1,10 @@
 <template>
-    <div class="w-full p-5 bg-sky-700">
-        <div class="container mx-auto px-4 text-white">
+    <div class="w-full p-3 bg-sky-700">
+        <div class="container mx-auto text-white">
             <div class="flex flex-row items-center justify-center text-center">
-                <router-link to="/" class="mr-6 font-bold text-2xl md:text-lg">Markets</router-link>
+                <span to="/" class="mr-6 font-bold text-2xl md:text-lg">Markets</span>
                 <div class="hidden md:flex flex-row items-center gap-4 ">
-                    <router-link to="/category" class="flex items-center">
+                    <router-link to="/" class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path
@@ -12,7 +12,7 @@
                         </svg>
                         Home
                     </router-link>
-                    <router-link to="/category" class="flex items-center">
+                    <router-link to="/product" class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -40,8 +40,8 @@
                         Flash Sale
                     </router-link>
                 </div>
-                <div class="ml-auto">
-                    <router-link to="/account" class="hidden md:flex items-center">
+                <div class="ml-auto flex items-center">
+                    <router-link :to="{ name: 'login' }" :class="user ? 'hidden' : 'flex items-center'">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -50,8 +50,32 @@
                         </svg>
                         Account
                     </router-link>
+                    <router-link :to="{ name: 'login' }" class="flex items-center" v-if="user">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                        </svg>
+                        Cart
+                    </router-link>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+export default {
+    setup() {
+
+        const store = useStore()
+
+        const user = computed(() => {
+            return store.getters['auth/isLoggedIn']
+        })
+
+        return { user }
+    }
+}
+</script>

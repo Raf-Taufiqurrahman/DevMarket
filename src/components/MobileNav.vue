@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed md:hidden bottom-0 border-t-2 w-full bg-white p-5 rounded-xl">
+    <div class="fixed md:hidden bottom-0 border-t-2 w-full bg-white p-2 rounded-xl">
         <div class="container mx-auto text-gray-800">
             <div class="grid grid-cols-5 justify-items-center">
                 <router-link to="/"
@@ -9,7 +9,7 @@
                             d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                     </svg>
                 </router-link>
-                <router-link to="/category"
+                <router-link to="/product"
                     class="flex items-center hover:border-2 hover:border-sky-500 p-2 hover:bg-sky-700 rounded-lg hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -25,7 +25,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </router-link>
-                <router-link to="/category"
+                <router-link to="/flashsale"
                     class="flex items-center hover:border-2 hover:border-sky-500 p-2 hover:bg-sky-700 rounded-lg hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -33,7 +33,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </router-link>
-                <router-link to="/category"
+                <router-link to="/login"
                     class="flex items-center hover:border-2 hover:border-sky-500 p-2 hover:bg-sky-700 rounded-lg hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
