@@ -4,17 +4,31 @@ const product = {
     namespaced: true,
     state: {
         products: [],
+        product : {},
     },
     mutations:{
-        SET_PRODUCTS(state, data){
+        GET_PRODUCTS(state, data){
             state.products = data
+        },
+        DETAIL_PRODUCT(state, product){
+            state.product = product
         }
+
     },
     actions: {
         async getLandingProducts({commit}){
             await Api.get('/landing/product')
             .then(response => {
-                commit('SET_PRODUCTS', response.data.data)
+                commit('GET_PRODUCTS', response.data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        getDetailProduct({commit}, slug){
+            Api.get(`/product/${slug}`)
+            .then(response => {
+                commit('DETAIL_PRODUCT', response.data.data)
             })
             .catch(error => {
                 console.log(error)

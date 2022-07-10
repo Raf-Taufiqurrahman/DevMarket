@@ -13,6 +13,10 @@ const auth = {
         GET_USER(state, user) {
             state.user = user
         },
+        AUTH_LOGOUT(state) {
+            state.token = ''
+            state.user = {}
+        }
     },
     actions: {
         login({ commit }, user) {
@@ -43,50 +47,32 @@ const auth = {
                 })
             })
         },
-register({ commit }, user) {
-
-            //define callback promise
+        register({ commit }, user) {
             return new Promise((resolve, reject) => {
-
-                //send data ke server
                 Api.post('/register', {
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                    password_confirmation: user.password_confirmation
+                })
+                .then(response => {
+                    const token = response.data.token
+                    const user = response.data.user
+                    
+                    localStorage.setItem('token', token)
+                    localStorage.setItem('user', JSON.stringify(user))
 
-                        //data yang dikirim ke serve untuk proses register
-                        name: user.name,
-                        email: user.email,
-                        password: user.password,
-                        password_confirmation: user.password_confirmation
+                    Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-                    })
+                    commit('AUTH_SUCCESS', token, user)
 
-                    .then(response => {
-
-                        //define variable dengan isi hasil response dari server
-                        const token = response.data.token
-                        const user = response.data.user
-
-                        //set localStorage untuk menyimpan token dan data user
-                        localStorage.setItem('token', token)
-                        localStorage.setItem('user', JSON.stringify(user))
-
-                        //set default header axios dengan token
-                        Api.defaults.headers.common['Authorization'] = "Bearer " +  token
-
-                        //commit auth success ke mutation
-                        commit('AUTH_SUCCESS', token, user)
-
-                        //resolve ke component dengan hasil response
-                        resolve(response)
-
-                    }).catch(error => {
-
-                        //jika gagal, remove localStorage dengan key token
-                        localStorage.removeItem('token')
-
-                        //reject ke component dengan hasil response
-                        reject(error.response.data)
-
-                    })
+                    resolve(response)
+                })
+                .catch(error => {
+                    localStorage.removeItem('token')
+                    
+                    reject(error.response.data)
+                })
 
             })
         },
@@ -99,6 +85,18 @@ register({ commit }, user) {
                 commit('GET_USER', response.data.user)
             })
         },
+        logout({ commit }) {
+            return new Promise((resolve) => {
+                commit('AUTH_LOGOUT')
+
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+
+                delete Api.defaults.headers.common['Authorization']
+
+                resolve()
+            })
+        }
     },
     getters: {
         currentUser(state) {

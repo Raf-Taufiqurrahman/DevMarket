@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed md:hidden bottom-0 border-t-2 w-full bg-white p-2 rounded-xl">
+    <div class="fixed md:hidden bottom-0 border-t-2 w-full bg-white p-2">
         <div class="container mx-auto text-gray-800">
             <div class="grid grid-cols-5 justify-items-center">
                 <router-link to="/"
@@ -34,10 +34,18 @@
                     </svg>
                 </router-link>
                 <router-link to="/login"
-                    class="flex items-center hover:border-2 hover:border-sky-500 p-2 hover:bg-sky-700 rounded-lg hover:text-white">
+                    class="flex items-center hover:border-2 hover:border-sky-500 p-2 hover:bg-sky-700 rounded-lg hover:text-white"
+                    v-if="!user">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </router-link>
+                <router-link :to="{ name: 'dashboard' }" class="flex items-center" v-if="user">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z"
                             clip-rule="evenodd" />
                     </svg>
                 </router-link>
@@ -45,3 +53,19 @@
         </div>
     </div>
 </template>
+
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+export default {
+    setup() {
+        const store = useStore()
+
+        const user = computed(() => {
+            return store.getters['auth/isLoggedIn']
+        })
+
+        return { user }
+    }
+}
+</script>
