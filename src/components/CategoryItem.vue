@@ -8,23 +8,23 @@
     </div>
 </template>
 
-    <script>
-    import { onMounted, computed } from 'vue'
-    import { useStore } from 'vuex'
-    
-    export default {
-        setup() {
-            const store = useStore()
-    
-            onMounted(() => {
-                store.dispatch('category/getCategoryHome')
-            })
-    
-            const categories = computed(() => {
-                return store.state.category.categories
-            })
-    
-            return { categories }
-        }
+<script>
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
+
+export default {
+    setup() {
+        const store = useStore()
+
+        onMounted(() => {
+            store.dispatch('category/getCategoryHome')
+        })
+
+        const categories = computed(() => {
+            return store.state.category.categories
+        })
+
+        return { categories }
     }
-    </script>
+}
+</script>

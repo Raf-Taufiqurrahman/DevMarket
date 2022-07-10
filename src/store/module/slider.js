@@ -1,8 +1,6 @@
 import Api from '../../api/Api';
-
 const slider = {
     namespaced: true,
-
     state: {
         sliders: [],
     },
@@ -23,5 +21,4 @@ const slider = {
         }
     },
 }
-
 export default slider

@@ -1,6 +1,9 @@
 <template>
     <div class="w-full py-6 px-4">
         <div class="container mx-auto">
+            <div class="snap-x flex space-x-4 p-2 overflow-x-auto pb-3">
+                <Slider />
+            </div>
             <div class="flex flex-col">
                 <h1 class="title">List Category</h1>
                 <p class="subTitle">This is a list of category</p>
@@ -23,7 +26,8 @@
 import Hero from '../components/Hero.vue';
 import CategoryItem from '../components/CategoryItem.vue';
 import ProductItem from '../components/ProductItem.vue'
+import Slider from '../components/Slider.vue'
 export default {
-    components: { Hero, CategoryItem, ProductItem }
+    components: { Hero, CategoryItem, ProductItem, Slider }
 }
 </script>
