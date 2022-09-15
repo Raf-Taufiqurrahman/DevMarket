@@ -1,5 +1,5 @@
 <template>
-    <div class="scroll-ml-10 snap-center w-4/6 shrink-0" v-for="slider in sliders" :key="slider.id">
+    <div class="min-w-full" v-for="slider in sliders" :key="slider.id">
         <img :src="slider.image" class="object-cover object-center w-full rounded-lg" />
     </div>
 </template>

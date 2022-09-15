@@ -61,13 +61,21 @@ const router = createRouter({
             }
         },
         {
-        path: '/customer/dashboard',
-        name: 'dashboard',
-        component: () => import( /* webpackChunkName: "login" */ '../views/dashboard/Index.vue'),
-        meta: {
-            requiresAuth: true,
-        }
-    },
+            path: '/customer/dashboard',
+            name: 'dashboard',
+            component: () => import( /* webpackChunkName: "dashboard" */ '../views/dashboard/Index.vue'),
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/customer/order',
+            name: 'order',
+            component: () => import( /* webpackChunkName: "order" */ '../views/order/Index.vue'),
+            meta: {
+                requiresAuth: true,
+            }
+        },
     ]
 })
 
